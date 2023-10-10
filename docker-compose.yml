@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+    awsCloudFront_AutoUpdate:
+        container_name: awsCloudFront_AutoUpdate
+        image: cloudfront_autoupdate
+        restart: always
+        environment:
+            TZ: Asia/Shanghai
+            domain: $domain
+            record_name: $record_name
+            api_key: $api_key
+            email: $email
+            stUrl: $stUrl
