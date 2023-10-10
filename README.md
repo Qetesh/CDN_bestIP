@@ -12,7 +12,7 @@ AWS CloudFront AutoUpdate 是一个使用 Python 编写的项目，旨在通过[
 - 基于当前网络对 IP 地址进行速度测试。
 - 更新 Cloudflare 域名解析为最快的 IP 地址。
 - 通过 python cron 定期自动更新记录，默认为三天运行一次
-  - **可使用自建服务器，指定测速链接，`stURL` 变量设置自定义 url 测速**
+- **可使用自建服务器，指定测速链接，`stURL` 变量设置自定义 url 测速**
 
 ---
 
