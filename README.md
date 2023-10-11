@@ -7,7 +7,7 @@ AWS CloudFront AutoUpdate 是一个使用 Python 编写的项目，旨在通过[
 该项目使用 [CloudflareSpeedTest](https://github.com/XIU2/CloudflareSpeedTest) 项目来进行IP测速。
 
 ## 功能
-
+![img_1.png](images/img_1.png)
 - 自动获取所有 AWS CloudFront IP 地址（使用maxmind地址库排除大陆备案IP地址段，测速IP包含'JP', 'KR', 'SG', 'US'）。
 - 基于当前网络对 IP 地址进行速度测试。
 - 更新 Cloudflare 域名解析为最快的 IP 地址。
