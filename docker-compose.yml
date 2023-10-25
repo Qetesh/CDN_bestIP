@@ -1,6 +1,7 @@
 version: '3.3'
 services:
     awsCloudFront_AutoUpdate:
+        build: ./
         container_name: awsCloudFront_AutoUpdate
         image: cloudfront_autoupdate
         restart: always

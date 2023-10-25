@@ -89,5 +89,5 @@ def update():
 
 update()
 jobs = BlockingScheduler()
-jobs.add_job(update, 'cron', hour=1, minute=00, day='*/3')
+jobs.add_job(update, 'cron', hour=1, minute=00, day='*/1')
 jobs.start()
