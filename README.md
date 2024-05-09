@@ -1,13 +1,13 @@
-# AWS CloudFront AutoUpdate
+# CDN_bestIP
 
 [中文版本](README.md) | [English Version](README_EN.md)
 
-AWS CloudFront AutoUpdate 是一个使用 Python 编写的项目，旨在通过[官方链接](https://d7uri8nf7uskq.cloudfront.net/tools/list-cloudfront-ips)实现自动获取 AWS CloudFront 的所有 IP 地址，并根据当前网络对其进行CloudFront优选，获取最快IP。后通过 Cloudflare 更新域名解析，优化当前网络下CloudFront的网络优化。
+CDN_bestIP 是一个使用 Python 编写的项目，通过[官方链接](https://d7uri8nf7uskq.cloudfront.net/tools/list-cloudfront-ips)实现自动获取 AWS CloudFront 的所有 IP 地址，并根据当前网络对其进行CloudFront优选，排除大陆IP，获取最快IP。后通过 Cloudflare 更新域名解析，优化当前网络下CloudFront的网络质量。
 
 该项目使用 [CloudflareSpeedTest](https://github.com/XIU2/CloudflareSpeedTest) 项目来进行IP测速。
 
 ## 功能
-![img.png](images/img.png)
+![img.png](images/img1.png)
 - 自动获取所有 AWS CloudFront IP 地址（使用maxmind地址库排除大陆备案IP地址段，测速IP包含'JP', 'KR', 'SG', 'US'）。
 - 基于当前网络对 IP 地址进行速度测试。
 - 更新 Cloudflare 域名解析为最快的 IP 地址。
@@ -39,20 +39,20 @@ AWS CloudFront AutoUpdate 是一个使用 Python 编写的项目，旨在通过[
 首先，使用以下命令构建 Docker 镜像：
 
 ```shell
-docker build -t cloudfront_autoupdate .
+docker build -t cdn_bestip .
 ```
 
 然后，运行容器（stUrl参数可选）：
 
 ```shell
-docker run -d --name awsCloudFront_AutoUpdate \
+docker run -d --name cdn_bestip \
   --restart always \
   -e domain='example.com' \
   -e record_name='cdn' \
   -e api_key='ccccccccccccccccccccccccccccccc' \
   -e email='admin@exmple.com' \
   -e stUrl='https://xxxxxxx.cloudfront.net/100MB.test' \
-  cloudfront_autoupdate
+  cdn_bestip
 ```
 
 或者，使用 Docker Compose 运行，需先设置`.env`文件：
@@ -79,7 +79,7 @@ docker compose up -d
 使用以下命令克隆项目到本地：
 
 ```shell
-git clone https://github.com/qetesh/awsCloudFront_AutoUpdate.git
+git clone https://github.com/qetesh/CDN_bestIP.git
 ```
 
 ### 2. 安装依赖
@@ -91,7 +91,7 @@ apt install python3 python3-pip
 进入项目目录，并安装所需的 Python 依赖：
 
 ```shell
-cd awsCloudFront_AutoUpdate
+cd CDN_bestIP
 pip3 install -r requirements.txt
 ```
 
@@ -116,7 +116,12 @@ python3 main.py
 
 ## 感谢项目
 
-- _https://github.com/XIU2/CloudflareSpeedTest_
+- https://github.com/XIU2/CloudflareSpeedTest
+- https://www.maxmind.com
+
+## Todo
+- [ ] CDN - CloudFlare 测试添加
+- [ ] DNS服务器接入
 
 ## 贡献
 

@@ -15,6 +15,7 @@ record_name = os.getenv('record_name')
 api_key = os.getenv('api_key')
 email = os.getenv('email')
 stUrl = os.getenv('stUrl')
+countryList = ['JP', 'KR', 'SG', 'US']
 
 system = platform.system()
 if system == 'Darwin':  # macOS
@@ -40,13 +41,14 @@ def update():
     except Exception as e:
         print(e)
 
-    print(time.strftime("%Y/%m/%d %H:%M:%S", time.localtime()), '筛选出指定国家的IP')
+    print(time.strftime("%Y/%m/%d %H:%M:%S", time.localtime()),
+          '筛选出' + '、'.join(str(x) for x in countryList) + '国家地区IP')
     with geoip2.database.Reader('GeoLite2-Country.mmdb') as reader:
         for ips in ipsJson['CLOUDFRONT_GLOBAL_IP_LIST'] + ipsJson['CLOUDFRONT_REGIONAL_EDGE_IP_LIST']:
             ip = ipaddress.ip_network(ips)[0]
             response = reader.country(ip)
-            if response.country.iso_code in ['JP', 'KR', 'SG', 'US']:
-                # print(ip, '-', response.country.iso_code)
+            # print(ip, '-', response.country.iso_code)
+            if response.country.iso_code in countryList:
                 ipList = ipList + [ips]
 
     # 更新IP列表至文件
@@ -57,9 +59,9 @@ def update():
     # 执行文件添加执行权限
     os.chmod(CloudflareSTDir + '/CloudflareST', 0o755)
     # 执行CloudflareST，进行测速优选
-    # ./CloudflareST -httping -f ip.txt -tl 150 -p 0 -url https://xxx.cloudfront.net/100m.test -o result.csv
+    # ./CloudflareST -httping -f ip.txt -tl 150 -p 0 -url https://d20c1iz4b4gn9p.cloudfront.net/100m.test -o result.csv
     print(time.strftime("%Y/%m/%d %H:%M:%S", time.localtime()), '进行cloudfront IP优选')
-    if stUrl is None:
+    if (stUrl is None) or (stUrl == ''):
         st = subprocess.Popen(['./CloudflareST', '-f', 'ip.txt',
                                '-tl', '150',
                                '-p', '0',
@@ -77,17 +79,19 @@ def update():
     output, error = st.communicate()
     st.wait()
 
+    # IP 地址,已发送,已接收,丢包率,平均延迟,下载速度 (MB/s)
+    # 99.86.219.4,4,4,0.00,46.19,50.93
     with open(CloudflareSTDir + '/result.csv', 'r') as f:
-        csvList = csv.reader(f)
-        next(csvList)
-        bestCDNIP = next(csvList)[0]
-        print(time.strftime("%Y/%m/%d %H:%M:%S", time.localtime()), '优选IP为:', bestCDNIP)
+        csvList = csv.DictReader(f)
+        bestCDNIP = next(csvList)
+        print(time.strftime("%Y/%m/%d %H:%M:%S", time.localtime()), '优选IP为:', bestCDNIP['IP 地址'], '延迟：',
+              bestCDNIP['平均延迟'], '下载速度(MB/s)：', bestCDNIP['下载速度 (MB/s)'])
 
     # 调用 CloudFlora API，更新 DNS 记录
-    update_dns_record(domain, record_name, bestCDNIP, api_key, email)
+    update_dns_record(domain, record_name, bestCDNIP['IP 地址'], api_key, email)
 
 
 update()
 jobs = BlockingScheduler()
-jobs.add_job(update, 'cron', hour=1, minute=00, day='*/1')
+jobs.add_job(update, 'cron', hour=1, minute=00, day='*/3')
 jobs.start()

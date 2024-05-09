@@ -2,8 +2,8 @@ version: '3.3'
 services:
     awsCloudFront_AutoUpdate:
         build: ./
-        container_name: awsCloudFront_AutoUpdate
-        image: cloudfront_autoupdate
+        container_name: cdn_bestip
+        image: cdn_bestip
         restart: always
         environment:
             TZ: Asia/Shanghai
