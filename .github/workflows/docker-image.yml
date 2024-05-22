@@ -25,9 +25,10 @@ jobs:
       - name: build
         working-directory: ./CloudflareSpeedTest
         run: |
-          export GOOS=linux
-          export GOARCH=amd64
           go build -o ../CloudflareST_linux_amd64/CloudflareST -ldflags "-s -w"
+        env:
+          GOOS: linux
+          GOARCH: amd64
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
