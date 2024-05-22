@@ -1,5 +1,5 @@
 # CDN_bestIP
-[![CDN_bestIP docker image](https://github.com/Qetesh/CDN_bestIP/actions/workflows/docker-image.yml/badge.svg?branch=main&event=workflow_run)](https://github.com/Qetesh/CDN_bestIP/actions/workflows/docker-image.yml)
+[![CDN_bestIP docker image](https://github.com/Qetesh/CDN_bestIP/actions/workflows/docker-image.yml/badge.svg)](https://github.com/Qetesh/CDN_bestIP/actions/workflows/docker-image.yml)
 
 [中文版本](README.md) | [English Version](README_EN.md)
 
@@ -28,6 +28,8 @@ CDN_bestIP 是一个使用 Python 编写的项目，通过[官方链接](https:/
 > 
 > Global API Key:`ccccccccccccccccccccccccccccccc`
 
+CloudflareSpeedTest构建方式：`export GOOS=linux && export GOARCH=amd64 && go build -o ..
+/CloudflareST_linux_amd64/CloudflareST -ldflags "-s -w"`
 ---
 
 ## 使用方法- Docker 环境
@@ -56,7 +58,6 @@ stUrl = 'https://xxxxxxx.cloudfront.net/100MB.test'
 ```
 
 ```shell
-docker compose build
 docker compose up -d
 ```
 
