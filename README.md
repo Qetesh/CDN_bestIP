@@ -1,4 +1,5 @@
 # CDN_bestIP
+[![CDN_bestIP docker image](https://github.com/Qetesh/CDN_bestIP/actions/workflows/docker-image.yml/badge.svg?branch=main&event=workflow_run)](https://github.com/Qetesh/CDN_bestIP/actions/workflows/docker-image.yml)
 
 [中文版本](README.md) | [English Version](README_EN.md)
 
