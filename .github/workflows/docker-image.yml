@@ -21,10 +21,10 @@ jobs:
           go-version: '>=1.22.0'
 
       - name: build
+        working-directory: ./CloudflareSpeedTest
         run: |
           export GOOS=linux
           export GOARCH=amd64
-          cd ./CloudflareSpeedTest
           go build -o ../CloudflareST_linux_amd64/CloudflareST -ldflags "-s -w"
 
       - name: Set up Docker Buildx
