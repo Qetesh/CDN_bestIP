@@ -4,5 +4,7 @@ services:
         container_name: cdn_bestip
         image: ghcr.io/qetesh/cdn_bestip:latest
         restart: always
+        environment:
+            TZ: Asia/Shanghai
         env_file:
             - .env

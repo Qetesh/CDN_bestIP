@@ -5,5 +5,7 @@ services:
         container_name: cdn_bestip
         image: cdn_bestip
         restart: always
+        environment:
+            TZ: Asia/Shanghai
         env_file:
             - .env
