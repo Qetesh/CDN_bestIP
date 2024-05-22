@@ -34,7 +34,34 @@ CDN_bestIP 是一个使用 Python 编写的项目，通过[官方链接](https:/
 > docker安装  https://docs.docker.com/engine/install/
 > 
 > docker compose安装 https://docs.docker.com/compose/install/
+```
+docker run -d --name ghcr.io/qetesh/cdn_bestip:latest \
+  --restart always \
+  -e domain='example.com' \
+  -e record_name='cdn' \
+  -e api_key='ccccccccccccccccccccccccccccccc' \
+  -e email='admin@exmple.com' \
+  -e stUrl='https://xxxxxxx.cloudfront.net/100MB.test' \
+  cdn_bestip
+```
 
+使用 Docker Compose 运行，可参考[docker-compose.yml](docker-compose.yml)。需先设置`.env`文件：
+.env
+```shell
+domain = 'example.com'
+record_name = 'cdn'
+api_key = 'ccccccccccccccccccccccccccccccc'
+email = 'admin@exmple.com'
+stUrl = 'https://xxxxxxx.cloudfront.net/100MB.test'
+```
+
+```shell
+docker compose build
+docker compose up -d
+```
+
+<details>
+  <summary>Docker 本地构建运行</summary>
 该项目可以在 Docker 环境中运行。你可以使用提供的 Dockerfile 构建镜像，并通过 Docker 或 Docker Compose 运行。
 
 首先，使用以下命令构建 Docker 镜像：
@@ -71,8 +98,10 @@ stUrl = 'https://xxxxxxx.cloudfront.net/100MB.test'
 docker compose build
 docker compose up -d
 ```
----
+</details>
 
+<details>
+  <summary>使用方法-本地运行</summary>
 ## 使用方法-本地运行
 
 ### 1. 克隆项目
@@ -82,7 +111,6 @@ docker compose up -d
 ```shell
 git clone https://github.com/qetesh/CDN_bestIP.git
 ```
-
 ### 2. 安装依赖
 
 安装python3、pip3：
@@ -112,6 +140,7 @@ export domain='example.com' record_name='cdn' api_key='ccccccccccccccccccccccccc
 ```shell
 python3 main.py
 ```
+</details>
 
 ---
 
@@ -121,8 +150,12 @@ python3 main.py
 - https://www.maxmind.com
 
 ## Todo
-- [ ] CDN - CloudFlare 测试添加
-- [ ] DNS服务器接入
+### CDN
+- [x] aws CloudFront
+- [ ] CloudFlare
+### DNS服务商
+- [x] CloudFlare
+- [ ] DNSPod
 
 ## 贡献
 

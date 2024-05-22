@@ -1,8 +1,9 @@
 version: '3.3'
 services:
     cdn_bestip:
+        build: ./
         container_name: cdn_bestip
-        image: ghcr.io/qetesh/cdn_bestip:latest
+        image: cdn_bestip
         restart: always
         environment:
             TZ: Asia/Shanghai
