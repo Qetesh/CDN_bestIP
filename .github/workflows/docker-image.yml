@@ -25,6 +25,7 @@ jobs:
       - name: build
         working-directory: ./CloudflareSpeedTest
         run: |
+          go mod tidy
           go build -o ../CloudflareST_linux_amd64/CloudflareST -ldflags "-s -w"
         env:
           GOOS: linux
