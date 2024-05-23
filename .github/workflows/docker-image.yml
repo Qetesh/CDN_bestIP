@@ -42,7 +42,7 @@ jobs:
           account-id: ${{ secrets.GEOIPUPDATE_ACCOUNT_ID }}
           license-key: ${{ secrets.GEOIPUPDATE_LICENSE_KEY }}
           edition-ids: 'GeoLite2-Country'
-          db-path: 'GeoLite2-Country.mmdb'
+          db-path: './'
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
