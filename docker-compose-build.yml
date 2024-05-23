@@ -7,8 +7,5 @@ services:
         restart: always
         environment:
             TZ: Asia/Shanghai
-            domain: $domain
-            record_name: $record_name
-            api_key: $api_key
-            email: $email
-            stUrl: $stUrl
+        env_file:
+            - .env
