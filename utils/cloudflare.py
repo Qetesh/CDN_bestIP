@@ -3,7 +3,7 @@ import time
 import CloudFlare
 
 
-def update_dns_record(domain, record_name, new_ip, api_key, email):
+def cloudflare_update_dns_record(domain, record_name, new_ip, api_key, email):
     cf = CloudFlare.CloudFlare(email=email, token=api_key)
 
     # 获取域名的Zone ID
