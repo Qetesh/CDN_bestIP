@@ -89,8 +89,8 @@ def get_fastest_ip():
 
     output, error = st.communicate()
     st.wait()
-    print(time.strftime("%Y/%m/%d %H:%M:%S", time.localtime()), '测速完成，获取最优IP\n', output.decode('utf-8'),
-          error.decode('utf-8'))
+    # print(time.strftime("%Y/%m/%d %H:%M:%S", time.localtime()), '测速完成，获取最优IP\n', output.decode('utf-8'),
+    #       error.decode('utf-8'))
 
 
 def update_dns_record():
