@@ -76,7 +76,7 @@ def get_fastest_ip():
     # 执行文件添加执行权限
     os.chmod(CloudflareSTDir + '/CloudflareST', 0o755)
     # 执行CloudflareST，进行测速优选
-    # ./CloudflareST -httping -f ip.txt -tl 150 -p 0 -url https://d20c1iz4b4gn9p.cloudfront.net/100m.test -o result.csv
+    # ./CloudflareST -httping -f ip.txt -tl 150 -p 0 -url https://speed.cloudflare.com/__down?bytes=200000000 -o result.csv
 
     print(time.strftime("%Y/%m/%d %H:%M:%S", time.localtime()), '进行', cdnProvider, ' IP优选')
     sturl_none_shell = shlex.split('./CloudflareST -f ip.txt -tl 150 -p 0 -dd -o result.csv')
